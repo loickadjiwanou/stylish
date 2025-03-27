@@ -1,9 +1,14 @@
 import React, { useState, useRef } from "react";
 import SplashsStyle from "./Splashs.style.js";
-import { View, Text, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, Dimensions, TouchableOpacity, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
+
+// Images
+import splash1 from "../../../assets/images/splash1.png";
+import splash2 from "../../../assets/images/splash2.png";
+import splash3 from "../../../assets/images/splash3.png";
 
 const { width } = Dimensions.get("window");
 
@@ -39,6 +44,7 @@ const Splashs = () => {
         activeDot={<View style={SplashsStyle.activeDot} />}
       >
         <View style={SplashsStyle.slide}>
+          <Image style={SplashsStyle.image} source={splash1} />
           <Text style={SplashsStyle.title}>Choose Products</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
@@ -47,6 +53,7 @@ const Splashs = () => {
         </View>
 
         <View style={SplashsStyle.slide}>
+          <Image style={SplashsStyle.image2} source={splash2} />
           <Text style={SplashsStyle.title}>Make Payment</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
@@ -55,6 +62,7 @@ const Splashs = () => {
         </View>
 
         <View style={SplashsStyle.slide}>
+          <Image style={SplashsStyle.image} source={splash3} />
           <Text style={SplashsStyle.title}>Get Your Order</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
