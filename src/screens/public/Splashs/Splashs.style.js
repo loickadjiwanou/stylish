@@ -54,7 +54,7 @@ const SplashsStyle = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     color: colors.black,
-    fontFamily: "Montserrat",
+    fontFamily: "MontserratBold",
     top: 10,
   },
   description: {
