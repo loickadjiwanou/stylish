@@ -14,12 +14,12 @@ const SplashsStyle = StyleSheet.create({
   },
   index: {
     color: colors.gray,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Montserrat",
   },
   skip: {
     color: colors.black,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Montserrat",
   },
   header: {
@@ -51,14 +51,14 @@ const SplashsStyle = StyleSheet.create({
     top: 20,
   },
   title: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: "bold",
     color: colors.black,
     fontFamily: "MontserratBold",
     top: 10,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.black,
     marginTop: 10,
     opacity: 0.5,
@@ -103,7 +103,7 @@ const SplashsStyle = StyleSheet.create({
   },
   nav: {
     color: colors.red,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Montserrat",
   },
 });

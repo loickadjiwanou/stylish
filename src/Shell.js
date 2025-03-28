@@ -7,8 +7,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Splash from "./screens/public/Splash/Splash";
 import Splashs from "./screens/public/Splashs/Splashs";
 import Login from "./screens/public/Login/Login";
+import SignUp from "./screens/public/SignUp/SignUp";
 // Private Screens
-//
+import Landing from "./screens/private/Landing/Landing";
 // Drawer content
 import DrawerContent from "./components/DrawerContent/DrawerContent";
 // Assets
@@ -70,6 +71,8 @@ const StackNavigator = () => {
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Splashs" component={Splashs} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Landing" component={Landing} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>
   );

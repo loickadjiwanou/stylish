@@ -19,7 +19,6 @@ const CustomButton = (props) => {
       disabled={props.isDisabled}
       color={props.color}
       loading={props.loading}
-      // loadingProps={{ size: props.loader.size, color: props.loader.color }}
       loadingProps={{ color: props.loaderColor || colors.black }}
       onPress={props.handlePress}
     />

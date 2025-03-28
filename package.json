@@ -15,6 +15,8 @@
     "@react-navigation/drawer": "^7.3.2",
     "@react-navigation/native": "^7.0.19",
     "@react-navigation/stack": "^7.2.3",
+    "@rneui/base": "^4.0.0-rc.8",
+    "@rneui/themed": "^4.0.0-rc.8",
     "expo": "~52.0.41",
     "expo-font": "^13.0.4",
     "expo-splash-screen": "^0.29.22",

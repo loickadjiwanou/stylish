@@ -6,22 +6,24 @@ import {
   LayoutAnimation,
   ScrollView,
 } from "react-native";
-import LoginStyle from "./Login.style.js";
+import SignUpStyle from "./SignUp.style.js";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
 
-const Login = (props) => {
+const SignUp = (props) => {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [togglePassword, setTogglePassword] = useState(false);
+  const [togglePassword2, setTogglePassword2] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -33,12 +35,12 @@ const Login = (props) => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       vertical
-      style={LoginStyle.view}
+      style={SignUpStyle.view}
     >
-      <Text style={LoginStyle.title}>Welcome{"\n"}Back!</Text>
+      <Text style={SignUpStyle.title}>Create an{"\n"}Account</Text>
 
-      <View style={LoginStyle.field}>
-        <View style={LoginStyle.fieldIcon}>
+      <View style={SignUpStyle.field}>
+        <View style={SignUpStyle.fieldIcon}>
           <FontAwesome name="user" size={20} color={colors.gray} />
         </View>
         <TextInput
@@ -48,12 +50,12 @@ const Login = (props) => {
           // autoCorrect={false}
           value={username}
           onChangeText={(text) => setUsername(text)}
-          style={LoginStyle.fieldInput}
+          style={SignUpStyle.fieldInput}
         />
       </View>
 
-      <View style={LoginStyle.field}>
-        <View style={LoginStyle.fieldIcon}>
+      <View style={SignUpStyle.field}>
+        <View style={SignUpStyle.fieldIcon}>
           <FontAwesome name="user" size={20} color={colors.gray} />
         </View>
         <TextInput
@@ -63,7 +65,7 @@ const Login = (props) => {
           // autoCorrect={false}
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={LoginStyle.fieldInputPassword}
+          style={SignUpStyle.fieldInputPassword}
           secureTextEntry={!togglePassword}
         />
         <TouchableOpacity
@@ -72,7 +74,7 @@ const Login = (props) => {
             setTogglePassword(!togglePassword);
           }}
           hitSlop={{ top: 2, bottom: 2, left: 2, right: 2 }}
-          style={LoginStyle.fieldEyeIcon}
+          style={SignUpStyle.fieldEyeIcon}
         >
           <Feather
             name={togglePassword ? "eye-off" : "eye"}
@@ -82,39 +84,65 @@ const Login = (props) => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        // onPress={() => navigation.navigate("ForgotPassword")}
-        onPress={() => {}}
-        hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
-        style={LoginStyle.forgot}
-      >
-        <Text style={LoginStyle.forgotText}>Forgot Password?</Text>
-      </TouchableOpacity>
+      <View style={SignUpStyle.field}>
+        <View style={SignUpStyle.fieldIcon}>
+          <FontAwesome name="user" size={20} color={colors.gray} />
+        </View>
+        <TextInput
+          placeholder="Confirm Password"
+          placeholderTextColor={colors.gray}
+          // autoCapitalize="words"
+          // autoCorrect={false}
+          value={password2}
+          onChangeText={(text) => setPassword2(text)}
+          style={SignUpStyle.fieldInputPassword}
+          secureTextEntry={!togglePassword2}
+        />
+        <TouchableOpacity
+          onPress={() => {
+            LayoutAnimation.easeInEaseOut();
+            setTogglePassword2(!togglePassword2);
+          }}
+          hitSlop={{ top: 2, bottom: 2, left: 2, right: 2 }}
+          style={SignUpStyle.fieldEyeIcon}
+        >
+          <Feather
+            name={togglePassword2 ? "eye-off" : "eye"}
+            size={20}
+            color={colors.gray}
+          />
+        </TouchableOpacity>
+      </View>
 
-      <View style={LoginStyle.button}>
+      <Text style={SignUpStyle.text}>
+        By clicking the <Text style={{ color: colors.red }}>Register</Text>{" "}
+        button, you agree to the public offer
+      </Text>
+
+      <View style={SignUpStyle.button}>
         <CustomButton
-          title="Login"
+          title="Create Account"
           textColor={colors.white}
           borderColor={colors.red}
           buttonHeight={55}
           color={colors.red}
-          handlePress={handleLogin}
+          handlePress={handleSignUp}
           loaderColor={colors.white}
           loading={loading}
         />
       </View>
 
-      <View style={LoginStyle.bottom}>
-        <Text style={LoginStyle.bottomText}>Create An Account </Text>
+      <View style={SignUpStyle.bottom}>
+        <Text style={SignUpStyle.bottomText}>I Already Have an Account </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp")}
+          onPress={() => navigation.navigate("Login")}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          style={LoginStyle.bottomButton}
+          style={SignUpStyle.bottomButton}
         >
-          <Text style={LoginStyle.bottomButtonText}> Sign Up</Text>
+          <Text style={SignUpStyle.bottomButtonText}> Login</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
-export default Login;
+export default SignUp;

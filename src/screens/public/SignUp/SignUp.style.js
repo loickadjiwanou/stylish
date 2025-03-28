@@ -4,7 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-const LoginStyle = StyleSheet.create({
+const SignUpStyle = StyleSheet.create({
   view: {
     flex: 1,
     backgroundColor: colors.white,
@@ -53,18 +53,8 @@ const LoginStyle = StyleSheet.create({
     alignItems: "center",
     left: 5,
   },
-  forgot: {
-    //
-  },
-  forgotText: {
-    fontSize: 14,
-    color: colors.red,
-    textAlign: "right",
-    fontFamily: "Montserrat",
-    marginTop: 10,
-  },
   button: {
-    marginTop: 60,
+    marginTop: 40,
   },
   bottom: {
     flexDirection: "row",
@@ -82,9 +72,15 @@ const LoginStyle = StyleSheet.create({
   },
   bottomButtonText: {
     textDecorationLine: "underline",
-    fontSize: 14,
+    fontSize: 16,
     color: colors.red,
     fontFamily: "Montserrat",
   },
+  text: {
+    fontSize: 12,
+    color: colors.gray,
+    fontFamily: "Montserrat",
+    marginTop: 30,
+  },
 });
-export default LoginStyle;
+export default SignUpStyle;
