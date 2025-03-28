@@ -14,6 +14,7 @@ const CustomButton = (props) => {
           borderWidth: 1,
           borderColor: props.borderColor,
           height: props.buttonHeight || 55,
+          width: props.buttonWidth || "100%",
         },
       ]}
       disabled={props.isDisabled}
