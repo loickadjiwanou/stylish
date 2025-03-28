@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -17,7 +17,7 @@ import Wishlist from "./screens/private/Wishlist/Wishlist";
 import Card from "./screens/private/Card/Card";
 import Search from "./screens/private/Search/Search";
 import Profile from "./screens/private/Profile/Profile";
-// Drawer content
+// Components
 import DrawerContent from "./components/DrawerContent/DrawerContent";
 // Assets
 import colors from "./assets/colors/colors";
@@ -88,6 +88,10 @@ const BottomTabNavigator = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 elevation: 5,
+                shadowColor: colors.black,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
               }}
             >
               <Feather name="shopping-cart" size={size} color={color} />
@@ -158,12 +162,11 @@ const DrawerNavigator = () => {
         drawerLabelStyle: {
           fontSize: 14,
           fontFamily: "Montserrat",
-          left: -2,
         },
       }}
     >
       <Drawer.Screen
-        name="Home"
+        name="Homee"
         component={BottomTabNavigator}
         options={{ drawerItemStyle: { display: "none" } }}
       />

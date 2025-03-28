@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import LandingStyle from "./Landing.style.js";
@@ -6,10 +6,27 @@ import landing from "../../../assets/images/landing.png";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
 import colors from "../../../assets/colors/colors.js";
 import { useNavigation } from "@react-navigation/native";
+import { SvgUri } from "react-native-svg";
+import { Asset } from "expo-asset";
 
 const Landing = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [logoUri, setLogoUri] = useState(null);
+
+  useEffect(() => {
+    const loadAssets = async () => {
+      const logoAsset = Asset.fromModule(
+        require("../../../assets/images/landing.svg")
+      );
+
+      await Asset.loadAsync(logoAsset);
+
+      setLogoUri(logoAsset.uri);
+    };
+
+    loadAssets();
+  }, []);
 
   const handleGetStarted = () => {
     setLoading(true);
@@ -21,8 +38,9 @@ const Landing = () => {
 
   return (
     <View style={LandingStyle.view}>
-      <Image source={landing} style={LandingStyle.image} />
+      {/* <SvgUri uri={logoUri} style={LandingStyle.image} /> */}
 
+      <Image source={landing} style={LandingStyle.image} />
       <LinearGradient
         colors={[
           "rgba(0,0,0,0)",

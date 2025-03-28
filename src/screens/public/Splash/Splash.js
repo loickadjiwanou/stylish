@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, Animated } from "react-native";
-import SplashStyle from "./Splash.style.js";
+import { Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import logo from "../../../assets/logos/logo.png";
+import { SvgUri } from "react-native-svg";
+import { Asset } from "expo-asset";
+import SplashStyle from "./Splash.style.js";
 
 const Splash = () => {
   const navigation = useNavigation();
   const [fadeAnim] = useState(new Animated.Value(0));
+  const [logoUri, setLogoUri] = useState(null);
 
   useEffect(() => {
+    const logoAsset = Asset.fromModule(
+      require("../../../assets/logos/logo.svg")
+    );
+    setLogoUri(logoAsset.uri);
+
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 2000,
@@ -22,14 +29,20 @@ const Splash = () => {
     return () => clearTimeout(timer);
   }, [fadeAnim, navigation]);
 
+  if (!logoUri) {
+    return null;
+  }
+
   return (
-    <View style={SplashStyle.view}>
-      {/* Animation d'apparition */}
-      <Animated.Image
-        source={logo}
-        style={[{ alignSelf: "center", opacity: fadeAnim }]}
-      />
-    </View>
+    <Animated.View style={SplashStyle.view}>
+      <Animated.View
+        style={{
+          opacity: fadeAnim,
+        }}
+      >
+        <SvgUri uri={logoUri} width={275} height={100} />
+      </Animated.View>
+    </Animated.View>
   );
 };
 

@@ -1,12 +1,34 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, TouchableOpacity } from "react-native";
 import TopBarStyle from "./TopBar.style.js";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
-import profilepic from "../../assets/images/profilepic.png";
-import logoblue from "../../assets/logos/logoblue.png";
+import { SvgUri } from "react-native-svg";
+import { Asset } from "expo-asset";
 
 const TopBar = (props) => {
   const navigation = useNavigation();
+
+  const [logoUri1, setLogoUri1] = useState(null);
+  const [logoUri2, setLogoUri2] = useState(null);
+
+  useEffect(() => {
+    const loadAssets = async () => {
+      const logoAsset1 = Asset.fromModule(
+        require("../../assets/images/profilepic.svg")
+      );
+      const logoAsset2 = Asset.fromModule(
+        require("../../assets/logos/logoblue.svg")
+      );
+
+      await Asset.loadAsync([logoAsset1, logoAsset2]);
+
+      setLogoUri1(logoAsset1.uri);
+      setLogoUri2(logoAsset2.uri);
+    };
+
+    loadAssets();
+  }, []);
 
   return (
     <View style={TopBarStyle.view}>
@@ -17,8 +39,16 @@ const TopBar = (props) => {
       >
         <Entypo name="menu" size={40} color="black" />
       </TouchableOpacity>
-      <Image source={logoblue} style={TopBarStyle.logoblue} />
-      <Image source={profilepic} style={TopBarStyle.profilepic} />
+      {!logoUri1 ? (
+        <View style={{ width: 112, height: 31 }} />
+      ) : (
+        <SvgUri uri={logoUri2} style={TopBarStyle.logoblue} />
+      )}
+      {!logoUri2 ? (
+        <View style={{ width: 45, height: 45 }} />
+      ) : (
+        <SvgUri uri={logoUri1} style={TopBarStyle.profilepic} />
+      )}
     </View>
   );
 };
