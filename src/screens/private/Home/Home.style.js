@@ -9,7 +9,7 @@ const HomeStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 40,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
 });
 export default HomeStyle;

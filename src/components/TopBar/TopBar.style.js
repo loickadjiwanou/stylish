@@ -6,7 +6,26 @@ import {
 } from "react-native-responsive-screen";
 const TopBarStyle = StyleSheet.create({
   view: {
-    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: colors.background,
+  },
+  logoblue: {
+    width: 112,
+    height: 31,
+  },
+  profilepic: {
+    width: 45,
+    height: 45,
+  },
+  menu: {
+    backgroundColor: colors.lightgray,
+    width: 45,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
   },
 });
 export default TopBarStyle;
