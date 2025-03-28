@@ -7,7 +7,7 @@ import {
 const SplashStyle = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     justifyContent: "center",
   },
 });

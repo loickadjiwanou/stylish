@@ -3,7 +3,7 @@ import colors from "../../assets/colors/colors";
 const DrawerContentStyle = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   head: {
     backgroundColor: colors.verylightgray,

@@ -15,7 +15,7 @@ const Landing = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      // navigation.navigate("Home");
+      navigation.navigate("DrawerNavigator");
     }, 2000);
   };
 
@@ -55,11 +55,11 @@ const Landing = () => {
           </View>
         </View>
       </LinearGradient>
-      <StatusBar
+      {/* <StatusBar
         barStyle={"light-content"}
         translucent={true}
         backgroundColor="transparent"
-      />
+      /> */}
     </View>
   );
 };

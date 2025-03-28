@@ -1,4 +1,6 @@
 import React from "react";
+import { View, Text } from "react-native";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -10,11 +12,15 @@ import Login from "./screens/public/Login/Login";
 import SignUp from "./screens/public/SignUp/SignUp";
 // Private Screens
 import Landing from "./screens/private/Landing/Landing";
+import Home from "./screens/private/Home/Home";
+import Wishlist from "./screens/private/Wishlist/Wishlist";
+import Card from "./screens/private/Card/Card";
+import Search from "./screens/private/Search/Search";
+import Profile from "./screens/private/Profile/Profile";
 // Drawer content
 import DrawerContent from "./components/DrawerContent/DrawerContent";
 // Assets
 import colors from "./assets/colors/colors";
-
 // Navigators
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -26,12 +32,114 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.black,
-        tabBarInactiveTintColor: colors.gray,
-        tabBarStyle: { backgroundColor: colors.white, height: 60 },
+        tabBarActiveTintColor: colors.red,
+        tabBarInactiveTintColor: colors.black,
+        tabBarStyle: {
+          backgroundColor: colors.white,
+          height: 65,
+          paddingBottom: 5,
+          borderTopWidth: 1,
+        },
       }}
     >
-      {/* <Tab.Screen name="Accueil" component={Accueil} /> */}
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="home" size={size} color={color} />
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text
+              style={{ color, fontSize: 12, fontFamily: "Montserrat", top: 2 }}
+            >
+              Home
+            </Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Wishlist"
+        component={Wishlist}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart-outline" size={size} color={color} />
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text
+              style={{ color, fontSize: 12, fontFamily: "Montserrat", top: 2 }}
+            >
+              Wishlist
+            </Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Card"
+        component={Card}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <View
+              style={{
+                backgroundColor: colors.white,
+                borderRadius: 50,
+                width: 60,
+                height: 60,
+                justifyContent: "center",
+                alignItems: "center",
+                elevation: 5,
+              }}
+            >
+              <Feather name="shopping-cart" size={size} color={color} />
+            </View>
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text
+              style={{
+                color,
+                fontSize: 12,
+                fontFamily: "Montserrat",
+                top: 2,
+                display: "none",
+              }}
+            >
+              Cart
+            </Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search-outline" size={size} color={color} />
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text
+              style={{ color, fontSize: 12, fontFamily: "Montserrat", top: 2 }}
+            >
+              Search
+            </Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="settings" size={size} color={color} />
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text
+              style={{ color, fontSize: 12, fontFamily: "Montserrat", top: 2 }}
+            >
+              Profile
+            </Text>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -59,7 +167,7 @@ const DrawerNavigator = () => {
         component={BottomTabNavigator}
         options={{ drawerItemStyle: { display: "none" } }}
       />
-      {/* <Drawer.Screen name="Messagerie" component={Messagerie} /> */}
+      {/* <Drawer.Screen name="Profile" component={Profile} /> */}
     </Drawer.Navigator>
   );
 };
@@ -73,6 +181,7 @@ const StackNavigator = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>
   );

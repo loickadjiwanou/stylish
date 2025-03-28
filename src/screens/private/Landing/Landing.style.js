@@ -7,7 +7,7 @@ import {
 const LandingStyle = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   image: {
     width: wp("100%"),

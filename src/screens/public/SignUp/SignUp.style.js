@@ -7,7 +7,7 @@ import {
 const SignUpStyle = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 40,
     paddingHorizontal: 20,
   },

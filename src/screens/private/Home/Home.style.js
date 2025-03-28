@@ -1,0 +1,15 @@
+import { StyleSheet, Platform, StatusBar } from "react-native";
+import colors from "../../../assets/colors/colors";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
+const HomeStyle = StyleSheet.create({
+  view: {
+    flex: 1,
+    backgroundColor: colors.background,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 40,
+    paddingHorizontal: 20,
+  },
+});
+export default HomeStyle;
