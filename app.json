@@ -5,11 +5,11 @@
     "author": "Loick Adjiwanou",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/default/icon.png",
+    "icon": "./src/assets/logos/logoasset.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./src/assets/default/splash-icon.png",
+      "image": "./src/assets/logos/logoasset.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,12 +18,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/default/adaptive-icon.png",
+        "foregroundImage": "./src/assets/logos/logoasset.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/default/favicon.png"
+      "favicon": "./src/assets/logos/logoasset.png"
     },
     "extra": {
       "eas": {
