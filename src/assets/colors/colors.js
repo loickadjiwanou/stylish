@@ -9,5 +9,6 @@ const colors = {
   green: "#00B74D",
   background: "#FDFDFD",
   pink: "#FFA3B3",
+  yellow: "#EDB310",
 };
 export default colors;

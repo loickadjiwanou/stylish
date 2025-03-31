@@ -17,6 +17,7 @@ import {
   FontAwesome,
   Ionicons,
   MaterialCommunityIcons,
+  FontAwesome6,
 } from "@expo/vector-icons";
 import cat1 from "../../../assets/images/category1.png";
 import cat2 from "../../../assets/images/category2.png";
@@ -25,7 +26,7 @@ import cat4 from "../../../assets/images/category4.png";
 import cat5 from "../../../assets/images/category5.png";
 import Swiper from "react-native-swiper";
 import backimage from "../../../assets/images/backimage.png";
-import { FontAwesome6 } from "@expo/vector-icons";
+import ArticleSwiper from "../../../components/ArticleSwiper/ArticleSwiper.js";
 
 const Home = (props) => {
   const navigation = useNavigation();
@@ -49,6 +50,76 @@ const Home = (props) => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // articles data
+  const data = [
+    {
+      id: "1",
+      title: "Women Printed Kurta",
+      description: "Neque porro quisquam est qui dolorem ipsum quia",
+      oldPrice: "₹2499",
+      price: "₹1500",
+      discount: "40%",
+      stars: "4.5",
+      rating: 56890,
+      image: require("../../../assets/articles_images/image1.png"),
+    },
+    {
+      id: "2",
+      title: "HRX by Hrithik Roshan",
+      description: "Neque porro quisquam est qui dolorem ipsum quia",
+      oldPrice: "₹2499",
+      price: "₹4999",
+      discount: "50%",
+      stars: "4.5",
+      rating: 344567,
+      image: require("../../../assets/articles_images/image2.png"),
+    },
+    {
+      id: "3",
+      title: "IWC Schaffhausen",
+      description: "2021 Pilot's Watch SIHH 2019 44mm",
+      oldPrice: "₹650",
+      price: "₹1599",
+      discount: "60%",
+      stars: "4",
+      rating: 344567,
+      image: require("../../../assets/articles_images/image3.png"),
+    },
+    {
+      id: "4",
+      title: "NIke Sneakers",
+      description: "Nike Air Jordan Retro 1 Low Mystic Black",
+      oldPrice: null,
+      price: "₹1900",
+      discount: null,
+      stars: "4.5",
+      rating: 46890,
+      image: require("../../../assets/articles_images/image4.png"),
+    },
+    {
+      id: "5",
+      title: "Labbins",
+      description: "Labbin White Sneakers For Men and Female",
+      oldPrice: "₹650",
+      price: "₹1250",
+      discount: "60%",
+      stars: "4",
+      rating: 344567,
+      image: require("../../../assets/articles_images/image5.png"),
+    },
+    {
+      id: "6",
+      title: "NIke Sneakers",
+      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
+      oldPrice: null,
+      price: "₹1900",
+      discount: null,
+      stars: "4.5",
+      rating: 256890,
+      image: require("../../../assets/articles_images/image6.png"),
+    },
+  ];
 
   return (
     <ScrollView
@@ -232,6 +303,12 @@ const Home = (props) => {
           />
         </TouchableOpacity>
       </View>
+
+      <View style={HomeStyle.articleSwiper}>
+        <ArticleSwiper articles={data} />
+      </View>
+
+      <View style={HomeStyle.footer} />
     </ScrollView>
   );
 };

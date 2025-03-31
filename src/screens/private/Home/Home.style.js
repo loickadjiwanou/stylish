@@ -177,7 +177,7 @@ const HomeStyle = StyleSheet.create({
   },
   dealBox: {
     backgroundColor: colors.blue,
-    borderRadius: 20,
+    borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -221,6 +221,19 @@ const HomeStyle = StyleSheet.create({
   },
   dealIcon: {
     marginRight: 8,
+  },
+  articleImage: {
+    width: 200,
+    height: 220,
+    resizeMode: "contain",
+    borderRadius: 20,
+    marginTop: -50,
+  },
+  articleSwiper: {
+    marginTop: 20,
+  },
+  footer: {
+    marginBottom: 200,
   },
 });
 export default HomeStyle;
