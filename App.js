@@ -31,6 +31,7 @@ export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     Montserrat: require("./src/assets/fonts/Montserrat-SemiBold.ttf"),
     MontserratBold: require("./src/assets/fonts/Montserrat-Bold.ttf"),
+    MontserratLight: require("./src/assets/fonts/Montserrat-Light.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

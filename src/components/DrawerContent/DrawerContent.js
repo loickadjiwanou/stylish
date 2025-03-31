@@ -27,10 +27,6 @@ import { useNavigation } from "@react-navigation/native";
 const DrawerContent = (props) => {
   const navigation = useNavigation();
 
-  return (
-    <View style={DrawerContentStyle.view}>
-      <Text>a</Text>
-    </View>
-  );
+  return <View style={DrawerContentStyle.view}></View>;
 };
 export default DrawerContent;

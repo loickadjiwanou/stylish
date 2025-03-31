@@ -33,6 +33,7 @@ const SignUp = (props) => {
 
   return (
     <ScrollView
+      overScrollMode="never"
       showsVerticalScrollIndicator={false}
       vertical
       style={SignUpStyle.view}
