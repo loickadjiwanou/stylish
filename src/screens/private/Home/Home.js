@@ -61,7 +61,7 @@ const Home = (props) => {
       price: "₹1500",
       discount: "40%",
       stars: "4.5",
-      rating: 56890,
+      ratings: 56890,
       image: require("../../../assets/articles_images/image1.png"),
     },
     {
@@ -72,7 +72,7 @@ const Home = (props) => {
       price: "₹4999",
       discount: "50%",
       stars: "4.5",
-      rating: 344567,
+      ratings: 344567,
       image: require("../../../assets/articles_images/image2.png"),
     },
     {
@@ -83,7 +83,7 @@ const Home = (props) => {
       price: "₹1599",
       discount: "60%",
       stars: "4",
-      rating: 344567,
+      ratings: 344567,
       image: require("../../../assets/articles_images/image3.png"),
     },
     {
@@ -94,7 +94,7 @@ const Home = (props) => {
       price: "₹1900",
       discount: null,
       stars: "4.5",
-      rating: 46890,
+      ratings: 46890,
       image: require("../../../assets/articles_images/image4.png"),
     },
     {
@@ -105,7 +105,7 @@ const Home = (props) => {
       price: "₹1250",
       discount: "60%",
       stars: "4",
-      rating: 344567,
+      ratings: 344567,
       image: require("../../../assets/articles_images/image5.png"),
     },
     {
@@ -116,7 +116,7 @@ const Home = (props) => {
       price: "₹1900",
       discount: null,
       stars: "4.5",
-      rating: 256890,
+      ratings: 256890,
       image: require("../../../assets/articles_images/image6.png"),
     },
   ];

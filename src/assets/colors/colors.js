@@ -10,5 +10,7 @@ const colors = {
   background: "#FDFDFD",
   pink: "#FFA3B3",
   yellow: "#EDB310",
+  stars: "#EDB310",
+  lightgray2: "#ccc",
 };
 export default colors;

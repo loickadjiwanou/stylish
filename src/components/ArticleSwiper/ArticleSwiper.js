@@ -1,19 +1,27 @@
 import React, { useRef, useState } from "react";
 import ArticleSwiperStyle from "./ArticleSwiper.style.js";
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
-import { Rating, AirbnbRating } from "react-native-ratings";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Dimensions,
+} from "react-native";
 import colors from "../../assets/colors/colors";
+import StarRating from "../StarRating/StarRating.js";
+import { EvilIcons, Feather } from "@expo/vector-icons";
+
+const screenWidth = Dimensions.get("window").width;
 
 const ArticleSwiper = (props) => {
   const data = props.articles;
   const [activeIndex, setActiveIndex] = useState(0);
-  const carouselRef = useRef(null);
-
+  const scrollRef = useRef(null);
   const [stars, setStars] = useState(data);
 
   const handleStars = (id, newStar) => {
-    console.log("handleStars called");
-    console.log("newStar", newStar, id);
+    console.log("Id:", id, "New Star:", newStar);
     setStars((prevStars) =>
       prevStars.map((item) =>
         item.id === id ? { ...item, stars: newStar } : item
@@ -26,54 +34,101 @@ const ArticleSwiper = (props) => {
       <View style={ArticleSwiperStyle.item}>
         <Image source={item?.image} style={ArticleSwiperStyle.image} />
         <View style={ArticleSwiperStyle.textSection}>
-          <Text style={ArticleSwiperStyle.text1}>{item?.title}</Text>
-          <Text style={ArticleSwiperStyle.text2}>{item?.description}</Text>
+          <Text numberOfLines={1} style={ArticleSwiperStyle.text1}>
+            {item?.title}
+          </Text>
+          <Text numberOfLines={2} style={ArticleSwiperStyle.text2}>
+            {item?.description}
+          </Text>
           <Text style={ArticleSwiperStyle.text3}>{item?.price}</Text>
           <View style={ArticleSwiperStyle.priceSection}>
-            <Text style={ArticleSwiperStyle.text4}>{item?.oldPrice}</Text>
-            <Text style={ArticleSwiperStyle.text5}>{item?.discount}OFF</Text>
+            {item?.discount ? (
+              <>
+                <Text style={ArticleSwiperStyle.text4}>{item?.oldPrice}</Text>
+                <Text style={ArticleSwiperStyle.text5}>
+                  {item?.discount}OFF
+                </Text>
+              </>
+            ) : (
+              (
+                <Text style={[ArticleSwiperStyle.text4, { display: "none" }]}>
+                  {item?.discount}OFF
+                </Text>
+              ) && (
+                <Text style={ArticleSwiperStyle.text5}>{item?.oldPrice}</Text>
+              )
+            )}
           </View>
-          <View>
-            {/* <Rating
-              showRating={false}
-              startingValue={item.stars}
-              imageSize={18}
-              onFinishRating={(star) => {
-                console.log("⭐ onFinishRating triggered", star, item.id);
-                handleStars(item.id, star);
-              }}
-            /> */}
-            <AirbnbRating
-              defaultRating={item.stars ?? 0}
-              reviews={["", "", "", "", ""]}
-              selectedColor={colors.yellow}
-              //   unSelectedColor={colors.lightgray}
-              ratingContainerStyle={{
-                width: 200,
-                marginTop: -50,
-                left: -38,
-                backgroundColor: "transparent",
-              }}
-              size={20}
-              onFinishRating={(rating) =>
-                console.log("AirbnbRating selected:", rating)
-              }
-            />
-            <Text style={ArticleSwiperStyle.text6}>{item?.starts}</Text>
+
+          <View style={ArticleSwiperStyle.ratingSection}>
+            <View style={ArticleSwiperStyle.ratingContainerStyle}>
+              <StarRating
+                rating={item.stars}
+                onRate={(newRating) => handleStars(item.id, newRating)}
+              />
+            </View>
+            <Text style={ArticleSwiperStyle.text6}>{item?.ratings}</Text>
           </View>
         </View>
       </View>
     );
   };
 
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      const newIndex = activeIndex - 1;
+      scrollRef.current.scrollTo({ x: newIndex * screenWidth, animated: true });
+      setActiveIndex(newIndex);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeIndex < stars.length - 1) {
+      const newIndex = activeIndex + 1;
+      scrollRef.current.scrollTo({ x: newIndex * screenWidth, animated: true });
+      setActiveIndex(newIndex);
+    }
+  };
+
   return (
     <View style={ArticleSwiperStyle.container}>
+      <View style={ArticleSwiperStyle.arrowContainer}>
+        {activeIndex > 0 ? (
+          <TouchableOpacity
+            onPress={handlePrev}
+            style={ArticleSwiperStyle.arrow}
+          >
+            <Feather name="chevron-left" size={25} color={colors.black} />
+          </TouchableOpacity>
+        ) : (
+          <View />
+        )}
+        {activeIndex < stars.length - 1 ? (
+          <TouchableOpacity
+            onPress={handleNext}
+            style={ArticleSwiperStyle.arrow}
+          >
+            <Feather name="chevron-right" size={25} color={colors.black} />
+          </TouchableOpacity>
+        ) : (
+          <View />
+        )}
+      </View>
       <ScrollView
         horizontal
         overScrollMode="never"
+        pagingEnabled
+        ref={scrollRef}
         showsHorizontalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onMomentumScrollEnd={(event) => {
+          const index = Math.round(
+            event.nativeEvent.contentOffset.x / screenWidth
+          );
+          setActiveIndex(index);
+        }}
       >
-        {data.map((item, index) => (
+        {stars.map((item, index) => (
           <View key={item.id}>{renderItem({ item })}</View>
         ))}
       </ScrollView>
