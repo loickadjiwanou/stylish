@@ -356,7 +356,11 @@ const Wishlist = (props) => {
   }, []);
 
   const renderItem = (item, index) => (
-    <View style={WishlistStyle.card} key={index}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Article", { article: item })}
+      style={WishlistStyle.card}
+      key={index}
+    >
       <Image
         source={item.image}
         style={WishlistStyle.image}
@@ -375,7 +379,7 @@ const Wishlist = (props) => {
         </View>
         <Text style={WishlistStyle.text6}>{item?.ratings}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

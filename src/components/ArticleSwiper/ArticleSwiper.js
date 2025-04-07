@@ -11,10 +11,12 @@ import {
 import colors from "../../assets/colors/colors";
 import StarRating from "../StarRating/StarRating.js";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const screenWidth = Dimensions.get("window").width;
 
 const ArticleSwiper = (props) => {
+  const navigation = useNavigation();
   const type = props.type;
   const data = props.articles;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,7 +34,10 @@ const ArticleSwiper = (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={ArticleSwiperStyle.item}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Article", { article: item })}
+        style={ArticleSwiperStyle.item}
+      >
         <Image source={item?.image} style={ArticleSwiperStyle.image} />
         <View style={ArticleSwiperStyle.textSection}>
           <Text
@@ -111,7 +116,7 @@ const ArticleSwiper = (props) => {
             </View>
           )}
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

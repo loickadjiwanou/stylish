@@ -1,21 +1,49 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import SearchStyle from "./Search.style.js";
 import TopBar from "../../../components/TopBar/TopBar.js";
 import colors from "../../../assets/colors/colors.js";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Search = (props) => {
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
-
+  const [screenLoader, setScreenLoader] = useState(true);
   const inputRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       inputRef.current?.focus();
     }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      inputRef.current?.focus();
+    }, [])
+  );
+
+  const activityIndicator = () => {
+    return (
+      <View style={SearchStyle.activityIndicator}>
+        <ActivityIndicator size="large" color={colors.black} />
+      </View>
+    );
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setScreenLoader(false);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -54,6 +82,8 @@ const Search = (props) => {
           />
         </View>
       </Pressable>
+
+      {screenLoader ? activityIndicator() : <Text>Search</Text>}
     </View>
   );
 };

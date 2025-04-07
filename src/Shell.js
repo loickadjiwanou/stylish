@@ -14,9 +14,10 @@ import SignUp from "./screens/public/SignUp/SignUp";
 import Landing from "./screens/private/Landing/Landing";
 import Home from "./screens/private/Home/Home";
 import Wishlist from "./screens/private/Wishlist/Wishlist";
-import Card from "./screens/private/Card/Card";
 import Search from "./screens/private/Search/Search";
 import Profile from "./screens/private/Profile/Profile";
+import Article from "./screens/private/Article/Article";
+import Cart from "./screens/private/Cart/Cart";
 // Components
 import DrawerContent from "./components/DrawerContent/DrawerContent";
 // Assets
@@ -75,8 +76,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Card"
-        component={Card}
+        name="Cart"
+        component={Cart}
         options={{
           tabBarIcon: ({ color, size }) => (
             <View
@@ -188,6 +189,8 @@ const StackNavigator = () => {
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Landing" component={Landing} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Article" component={Article} />
+      <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>
   );
