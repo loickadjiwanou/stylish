@@ -28,9 +28,9 @@ const HomeStyle = StyleSheet.create({
     marginBottom: 20,
     elevation: 5,
     shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
   },
   iconBox: {
     width: 30,

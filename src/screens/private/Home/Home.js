@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   RefreshControl,
+  Pressable,
 } from "react-native";
 import HomeStyle from "./Home.style.js";
 import TopBar from "../../../components/TopBar/TopBar.js";
@@ -128,6 +129,10 @@ const Home = (props) => {
     },
   ];
 
+  const filteredData = data.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   const [refreshing, setRefreshing] = useState(false);
 
   const handleRefresh = () => {
@@ -145,7 +150,10 @@ const Home = (props) => {
         <TopBar />
       </View>
 
-      <View style={HomeStyle.searchComponent}>
+      <Pressable
+        onPress={() => navigation.navigate("Search")}
+        style={HomeStyle.searchComponent}
+      >
         <View style={HomeStyle.iconBox}>
           <AntDesign
             name="search1"
@@ -157,8 +165,10 @@ const Home = (props) => {
         <TextInput
           placeholder="Search"
           value={search}
-          onChangeText={(text) => setSearch(text)}
+          // onChangeText={(text) => setSearch(text)}
           style={HomeStyle.input}
+          editable={false}
+          onPressIn={() => navigation.navigate("Search")}
         />
         <View style={HomeStyle.iconBox}>
           <MaterialCommunityIcons
@@ -168,7 +178,7 @@ const Home = (props) => {
             style={HomeStyle.icon}
           />
         </View>
-      </View>
+      </Pressable>
 
       <View style={HomeStyle.topLayer}>
         <Text style={HomeStyle.topLayerTitle}>All Featured</Text>
@@ -328,7 +338,12 @@ const Home = (props) => {
         </View>
 
         <View style={HomeStyle.articleSwiper}>
-          <ArticleSwiper articles={data} />
+          <ArticleSwiper
+            key={
+              filteredData.length + filteredData.map((item) => item.id).join()
+            }
+            articles={filteredData}
+          />
         </View>
 
         <View style={HomeStyle.offerBox}>
@@ -395,7 +410,13 @@ const Home = (props) => {
         </View>
 
         <View style={HomeStyle.articleSwiper2}>
-          <ArticleSwiper articles={data} type={"square-small"} />
+          <ArticleSwiper
+            key={
+              filteredData.length + filteredData.map((item) => item.id).join()
+            }
+            articles={filteredData}
+            type={"square-small"}
+          />
         </View>
 
         <View>
