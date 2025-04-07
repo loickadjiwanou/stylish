@@ -30,18 +30,18 @@ const ArticleSwiperStyle = StyleSheet.create({
     width: 200,
   },
   text1: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "MontserratBold",
     color: colors.black,
   },
   text2: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Montserrat",
     color: colors.black,
     marginTop: 8,
   },
   text3: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "MontserratBold",
     color: colors.black,
     marginTop: 8,
@@ -51,13 +51,13 @@ const ArticleSwiperStyle = StyleSheet.create({
     alignItems: "center",
   },
   text4: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Montserrat",
     color: colors.gray,
     textDecorationLine: "line-through",
   },
   text5: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Montserrat",
     color: colors.red,
     left: 5,
@@ -83,7 +83,7 @@ const ArticleSwiperStyle = StyleSheet.create({
     top: 2,
   },
   text6: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "MontserratLight",
     color: colors.gray,
     left: 5,

@@ -15,6 +15,7 @@ import { EvilIcons, Feather } from "@expo/vector-icons";
 const screenWidth = Dimensions.get("window").width;
 
 const ArticleSwiper = (props) => {
+  const type = props.type;
   const data = props.articles;
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
@@ -34,18 +35,56 @@ const ArticleSwiper = (props) => {
       <View style={ArticleSwiperStyle.item}>
         <Image source={item?.image} style={ArticleSwiperStyle.image} />
         <View style={ArticleSwiperStyle.textSection}>
-          <Text numberOfLines={1} style={ArticleSwiperStyle.text1}>
+          <Text
+            numberOfLines={1}
+            style={[
+              ArticleSwiperStyle.text1,
+              type === "square-small" && { fontFamily: "MontserratLight" },
+            ]}
+          >
             {item?.title}
           </Text>
-          <Text numberOfLines={2} style={ArticleSwiperStyle.text2}>
+          <Text
+            numberOfLines={2}
+            style={[
+              ArticleSwiperStyle.text2,
+              type === "square-small" && {
+                fontFamily: "MontserratLight",
+                marginTop: 0,
+              },
+            ]}
+          >
             {item?.description}
           </Text>
-          <Text style={ArticleSwiperStyle.text3}>{item?.price}</Text>
+          <Text
+            numberOfLines={1}
+            style={[
+              ArticleSwiperStyle.text3,
+              type === "square-small" && {
+                fontFamily: "Montserrat",
+                marginTop: 0,
+              },
+            ]}
+          >
+            {item?.price}
+          </Text>
           <View style={ArticleSwiperStyle.priceSection}>
             {item?.discount ? (
               <>
-                <Text style={ArticleSwiperStyle.text4}>{item?.oldPrice}</Text>
-                <Text style={ArticleSwiperStyle.text5}>
+                <Text
+                  style={[
+                    ArticleSwiperStyle.text4,
+                    type === "square-small" && { fontFamily: "Montserrat" },
+                  ]}
+                >
+                  {item?.oldPrice}
+                </Text>
+                <Text
+                  style={[
+                    ArticleSwiperStyle.text5,
+                    type === "square-small" && { fontFamily: "Montserrat" },
+                  ]}
+                >
                   {item?.discount}OFF
                 </Text>
               </>
@@ -60,15 +99,17 @@ const ArticleSwiper = (props) => {
             )}
           </View>
 
-          <View style={ArticleSwiperStyle.ratingSection}>
-            <View style={ArticleSwiperStyle.ratingContainerStyle}>
-              <StarRating
-                rating={item.stars}
-                onRate={(newRating) => handleStars(item.id, newRating)}
-              />
+          {type !== "square-small" && (
+            <View style={ArticleSwiperStyle.ratingSection}>
+              <View style={ArticleSwiperStyle.ratingContainerStyle}>
+                <StarRating
+                  rating={item.stars}
+                  onRate={(newRating) => handleStars(item.id, newRating)}
+                />
+              </View>
+              <Text style={ArticleSwiperStyle.text6}>{item?.ratings}</Text>
             </View>
-            <Text style={ArticleSwiperStyle.text6}>{item?.ratings}</Text>
-          </View>
+          )}
         </View>
       </View>
     );

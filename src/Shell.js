@@ -178,7 +178,10 @@ const DrawerNavigator = () => {
 // Stack Navigator
 const StackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      initialRouteName="DrawerNavigator"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Splashs" component={Splashs} />
       <Stack.Screen name="Login" component={Login} />

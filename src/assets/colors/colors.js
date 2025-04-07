@@ -12,5 +12,6 @@ const colors = {
   yellow: "#EDB310",
   stars: "#EDB310",
   lightgray2: "#ccc",
+  orange: "#EFAD18",
 };
 export default colors;
