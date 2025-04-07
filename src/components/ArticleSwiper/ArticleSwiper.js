@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import colors from "../../assets/colors/colors";
 import StarRating from "../StarRating/StarRating.js";
-import { EvilIcons, Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const screenWidth = Dimensions.get("window").width;
 

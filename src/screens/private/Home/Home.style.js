@@ -48,6 +48,7 @@ const HomeStyle = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginBottom: 15,
   },
   topLayerTitle: {
     fontSize: 18,
@@ -82,7 +83,8 @@ const HomeStyle = StyleSheet.create({
     color: colors.black,
   },
   categoryBox: {
-    marginVertical: 20,
+    marginBottom: 20,
+    marginTop: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  RefreshControl,
 } from "react-native";
 import HomeStyle from "./Home.style.js";
 import TopBar from "../../../components/TopBar/TopBar.js";
@@ -127,62 +128,76 @@ const Home = (props) => {
     },
   ];
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    const timer = setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  };
+
   return (
     <View style={HomeStyle.view}>
       <View style={{ marginBottom: 10 }}>
         <TopBar />
       </View>
 
+      <View style={HomeStyle.searchComponent}>
+        <View style={HomeStyle.iconBox}>
+          <AntDesign
+            name="search1"
+            size={24}
+            color={colors.gray}
+            style={HomeStyle.icon}
+          />
+        </View>
+        <TextInput
+          placeholder="Search"
+          value={search}
+          onChangeText={(text) => setSearch(text)}
+          style={HomeStyle.input}
+        />
+        <View style={HomeStyle.iconBox}>
+          <MaterialCommunityIcons
+            name="microphone-outline"
+            size={24}
+            color={colors.gray}
+            style={HomeStyle.icon}
+          />
+        </View>
+      </View>
+
+      <View style={HomeStyle.topLayer}>
+        <Text style={HomeStyle.topLayerTitle}>All Featured</Text>
+
+        <View style={HomeStyle.sortBox}>
+          <TouchableOpacity style={HomeStyle.sort}>
+            <Text style={HomeStyle.sortText}>Sort</Text>
+            <FontAwesome name="sort" size={20} color={colors.black} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={HomeStyle.sort}>
+            <Text style={HomeStyle.sortText}>Filter</Text>
+            <MaterialCommunityIcons
+              name="filter-outline"
+              size={20}
+              color={colors.black}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <ScrollView
         vertical
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
       >
-        <View style={HomeStyle.searchComponent}>
-          <View style={HomeStyle.iconBox}>
-            <AntDesign
-              name="search1"
-              size={24}
-              color={colors.gray}
-              style={HomeStyle.icon}
-            />
-          </View>
-          <TextInput
-            placeholder="Search"
-            value={search}
-            onChange={(text) => setSearch(text)}
-            style={HomeStyle.input}
-          />
-          <View style={HomeStyle.iconBox}>
-            <MaterialCommunityIcons
-              name="microphone-outline"
-              size={24}
-              color={colors.gray}
-              style={HomeStyle.icon}
-            />
-          </View>
-        </View>
-
-        <View style={HomeStyle.topLayer}>
-          <Text style={HomeStyle.topLayerTitle}>All Featured</Text>
-
-          <View style={HomeStyle.sortBox}>
-            <TouchableOpacity style={HomeStyle.sort}>
-              <Text style={HomeStyle.sortText}>Sort</Text>
-              <FontAwesome name="sort" size={20} color={colors.black} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={HomeStyle.sort}>
-              <Text style={HomeStyle.sortText}>Filter</Text>
-              <MaterialCommunityIcons
-                name="filter-outline"
-                size={20}
-                color={colors.black}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
         <View style={HomeStyle.categoryBox}>
           <TouchableOpacity style={HomeStyle.category}>
             <Image source={cat1} style={HomeStyle.categoryImage} />
