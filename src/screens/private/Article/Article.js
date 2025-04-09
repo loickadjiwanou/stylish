@@ -119,6 +119,10 @@ const Article = (props) => {
     },
   ];
 
+  const handleAddToCart = () => {
+    // add to cart
+  };
+
   return (
     <View style={ArticleStyle.view}>
       <View style={ArticleStyle.topBar}>
@@ -311,10 +315,7 @@ const Article = (props) => {
         </View>
 
         <View style={ArticleStyle.buttonsView}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Cart")}
-            style={ArticleStyle.gotocart}
-          >
+          <View style={ArticleStyle.gotocart}>
             <View style={ArticleStyle.gotocarticon}>
               <MaterialCommunityIcons
                 name="cart-outline"
@@ -322,15 +323,15 @@ const Article = (props) => {
                 color={colors.white}
               />
             </View>
-            <View style={ArticleStyle.gotocarttxtview}>
-              <Text style={ArticleStyle.gotocarttxt}>Go to cart</Text>
-            </View>
-          </TouchableOpacity>
+            <Pressable
+              onPress={() => handleAddToCart(article)}
+              style={ArticleStyle.gotocarttxtview}
+            >
+              <Text style={ArticleStyle.gotocarttxt}>Add to cart</Text>
+            </Pressable>
+          </View>
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("BuyNow")}
-            style={ArticleStyle.buynowcart}
-          >
+          <View style={ArticleStyle.buynowcart}>
             <View style={ArticleStyle.buynowcarticon}>
               <MaterialCommunityIcons
                 name="cart-outline"
@@ -338,10 +339,15 @@ const Article = (props) => {
                 color={colors.white}
               />
             </View>
-            <View style={ArticleStyle.buynowcarttxtview}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate("BuyNow", { article: article })
+              }
+              style={ArticleStyle.buynowcarttxtview}
+            >
               <Text style={ArticleStyle.buynowcarttxt}>Buy Now</Text>
-            </View>
-          </TouchableOpacity>
+            </Pressable>
+          </View>
 
           <TouchableOpacity onPress={() => setLiked(!liked)}>
             <AntDesign
