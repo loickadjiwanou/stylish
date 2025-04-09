@@ -51,7 +51,7 @@ const Checkout = (props) => {
   const handleOnBackDoorPress = () => {
     setModalVisible(false);
     setTimeout(() => {
-      navigation.navigate("Home");
+      navigation.navigate("DrawerNavigator");
     }, 500);
   };
 
