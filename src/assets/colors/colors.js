@@ -2,6 +2,7 @@ const colors = {
   black: "#000000",
   white: "#ffffff",
   blue: "#4392F9",
+  blue2: "#296BCD",
   red: "#F83758",
   gray: "#808080",
   lightgray: "#F0F0F0",
@@ -9,9 +10,11 @@ const colors = {
   green: "#00B74D",
   background: "#FDFDFD",
   pink: "#FFA3B3",
+  lightpink: "#FFCCD5",
   yellow: "#EDB310",
   stars: "#EDB310",
   lightgray2: "#ccc",
   orange: "#EFAD18",
+  green: "#55DC8D",
 };
 export default colors;

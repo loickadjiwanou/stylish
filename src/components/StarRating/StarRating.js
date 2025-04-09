@@ -20,7 +20,16 @@ const StarRating = (props) => {
       ]}
     >
       {stars.map((star) => (
-        <TouchableOpacity key={star} onPress={() => onRate(star)}>
+        <TouchableOpacity
+          key={star}
+          onPress={() => {
+            if (star === rating) {
+              onRate(0);
+            } else {
+              onRate(star);
+            }
+          }}
+        >
           <AntDesign
             name="star"
             size={from === "flatlist" ? 16 : 20}
