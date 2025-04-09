@@ -20,7 +20,6 @@ const BuyNowStyle = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 5,
     marginBottom: 20,
   },
   title: {
@@ -147,14 +146,10 @@ const BuyNowStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginVertical: 40,
+    paddingHorizontal: 10,
   },
   paymentButton: {
-    backgroundColor: colors.red,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    paddingHorizontal: 25,
-    paddingVertical: 16,
+    //
   },
   paymentButtonText: {
     fontFamily: "MontserratBold",

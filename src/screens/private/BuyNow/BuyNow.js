@@ -5,6 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Entypo, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import colors from "../../../assets/colors/colors.js";
+import CustomButton from "../../../components/CustomButton/CustomButton.js";
 
 const BuyNow = (props) => {
   const navigation = useNavigation();
@@ -62,6 +63,16 @@ const BuyNow = (props) => {
   const [selectedQuantity, setSelectedQuantity] = useState(
     quantityList[0].value
   );
+
+  const [loading, setLoading] = useState(false);
+
+  const handleProceed = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("Checkout", { article: article });
+    }, 1000);
+  };
 
   return (
     <View style={BuyNowStyle.view}>
@@ -227,14 +238,20 @@ const BuyNow = (props) => {
               Details
             </Text>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Checkout")}
-            style={BuyNowStyle.paymentButton}
-          >
-            <Text style={BuyNowStyle.paymentButtonText}>
-              Proceed to Payment
-            </Text>
-          </TouchableOpacity>
+          <View style={BuyNowStyle.paymentButton}>
+            <CustomButton
+              title="Proceed to Payment"
+              textColor={colors.white}
+              borderColor={colors.red}
+              buttonHeight={55}
+              buttonWidth={260}
+              titleSize={18}
+              color={colors.red}
+              handlePress={handleProceed}
+              loaderColor={colors.white}
+              loading={loading}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

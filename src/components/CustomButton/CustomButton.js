@@ -7,7 +7,10 @@ const CustomButton = (props) => {
   return (
     <Button
       title={props.title}
-      titleStyle={[CustomButtonStyle.titleStyle, { color: props.textColor }]}
+      titleStyle={[
+        CustomButtonStyle.titleStyle,
+        { color: props.textColor, fontSize: props.titleSize || 18 },
+      ]}
       buttonStyle={[
         CustomButtonStyle.buttonStyle,
         {
