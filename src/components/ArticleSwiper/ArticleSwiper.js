@@ -12,6 +12,7 @@ import colors from "../../assets/colors/colors";
 import StarRating from "../StarRating/StarRating.js";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { saveData, getData } from "../../functions/mmkv.js";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -23,19 +24,24 @@ const ArticleSwiper = (props) => {
   const scrollRef = useRef(null);
   const [stars, setStars] = useState(data);
 
-  const handleStars = (id, newStar) => {
-    console.log("Id:", id, "New Star:", newStar);
+  const handleStars = async (id, newStar) => {
     setStars((prevStars) =>
       prevStars.map((item) =>
         item.id === id ? { ...item, stars: newStar } : item
       )
     );
+    const updatedArticles = data.map((item) =>
+      item.id === id ? { ...item, stars: newStar } : item
+    );
+    await saveData("articles", updatedArticles);
   };
 
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Article", { article: item })}
+        onPress={() =>
+          navigation.navigate("Article", { article: item, from: "swiper" })
+        }
         style={ArticleSwiperStyle.item}
       >
         <Image source={item?.image} style={ArticleSwiperStyle.image} />

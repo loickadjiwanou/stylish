@@ -15,6 +15,7 @@ const ProfileStyle = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    top: hp("40%"),
   },
   topBar: {
     flexDirection: "row",
@@ -22,10 +23,15 @@ const ProfileStyle = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
+  topBarRight: {
+    width: "20%",
+  },
   title: {
     fontSize: 16,
     fontFamily: "MontserratBold",
     color: colors.black,
+    width: "60%",
+    textAlign: "center",
   },
   imageContainer: {
     alignItems: "center",

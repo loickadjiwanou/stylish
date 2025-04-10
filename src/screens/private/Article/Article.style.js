@@ -15,6 +15,7 @@ const ArticleStyle = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    top: hp("40%"),
   },
   topBar: {
     flexDirection: "row",
@@ -168,8 +169,8 @@ const ArticleStyle = StyleSheet.create({
   },
   gotocarticon: {
     backgroundColor: colors.blue2,
-    width: 45,
-    height: 45,
+    width: 50,
+    height: 50,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
@@ -181,6 +182,7 @@ const ArticleStyle = StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 6,
+    zIndex: 1,
   },
   gotocarttxtview: {
     height: 40,
@@ -208,8 +210,8 @@ const ArticleStyle = StyleSheet.create({
   },
   buynowcarticon: {
     backgroundColor: colors.green,
-    width: 45,
-    height: 45,
+    width: 50,
+    height: 50,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
@@ -221,6 +223,7 @@ const ArticleStyle = StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 6,
+    zIndex: 1,
   },
   buynowcarttxtview: {
     height: 40,

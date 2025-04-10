@@ -15,6 +15,7 @@ const CartStyle = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    top: hp("40%"),
   },
   topBar: {
     flexDirection: "row",

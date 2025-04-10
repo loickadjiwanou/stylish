@@ -9,7 +9,7 @@ export const saveData = (key, value) => {
     const stringValue =
       typeof value === "string" ? value : JSON.stringify(value);
     storage.set(key, stringValue);
-    console.log("Data saved for key ", key);
+    console.log("Data saved for key", key);
   } catch (error) {
     console.error(`Something went wrong while saving ${key}: `, error);
   }
@@ -19,7 +19,7 @@ export const saveData = (key, value) => {
 export const getData = (key) => {
   try {
     const value = storage.getString(key);
-    console.log("Data retrieved for key ", key);
+    console.log("Data retrieved for key", key);
     return value ? JSON.parse(value) : null;
   } catch (error) {
     console.error(`Something went wrong while getting ${key}: `, error);
@@ -31,7 +31,7 @@ export const getData = (key) => {
 export const deleteData = (key) => {
   try {
     storage.delete(key);
-    console.log("Data deleted for key ", key);
+    console.log("Data deleted for key", key);
   } catch (error) {
     console.error(`Something went wrong while deleting ${key}: `, error);
   }

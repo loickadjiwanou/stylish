@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, Platform } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Image } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -28,6 +28,8 @@ import colors from "./assets/colors/colors";
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+// MMKV
+import { getData } from "./functions/mmkv";
 
 // Bottom Tab Navigator
 const BottomTabNavigator = () => {
@@ -183,32 +185,66 @@ const DrawerNavigator = () => {
   );
 };
 
-// Stack Navigator
-const StackNavigator = () => {
-  return (
-    <Stack.Navigator
-      // initialRouteName="DrawerNavigator"
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="Splash" component={Splash} />
-      <Stack.Screen name="Splashs" component={Splashs} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Landing" component={Landing} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Article" component={Article} />
-      <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="BuyNow" component={BuyNow} />
-      <Stack.Screen name="Checkout" component={Checkout} />
-      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-    </Stack.Navigator>
-  );
-};
-
 const Shell = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkUserData = async () => {
+      try {
+        const userData = await getData("userData");
+        if (userData && Object.keys(userData).length > 0) {
+          setUserLoggedIn(true);
+        } else {
+          setUserLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Error checking user login status:", error);
+        setUserLoggedIn(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkUserData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: colors.white,
+        }}
+      >
+        <Image
+          source={require("./assets/logos/logoasset.png")}
+          style={{ width: 125, height: 100 }}
+        />
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <Stack.Navigator
+        initialRouteName={userLoggedIn ? "DrawerNavigator" : "Splash"}
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Splashs" component={Splashs} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Landing" component={Landing} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Article" component={Article} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="BuyNow" component={BuyNow} />
+        <Stack.Screen name="Checkout" component={Checkout} />
+        <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

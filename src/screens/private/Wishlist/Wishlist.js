@@ -19,6 +19,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import StarRating from "../../../components/StarRating/StarRating.js";
+import { getData, saveData } from "../../../functions/mmkv.js";
 
 const Wishlist = (props) => {
   const navigation = useNavigation();
@@ -28,258 +29,26 @@ const Wishlist = (props) => {
   const activityIndicator = () => {
     return (
       <View style={WishlistStyle.activityIndicator}>
-        <ActivityIndicator size="large" color={colors.black} />
+        <ActivityIndicator size="small" color={colors.black} />
       </View>
     );
   };
 
-  // Articles data
-  const wishlist = [
-    {
-      id: "0",
-      title: "HRX by Hrithik Roshan",
-      description: "Neque porro quisquam est qui dolorem ipsum quia",
-      oldPrice: "₹ 2499",
-      price: "₹ 4999",
-      discount: "50%",
-      stars: "4.5",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory2.png"),
-    },
-    {
-      id: "1",
-      title: "NIke Sneakers",
-      description: "Nike Air Jordan Retro 1 Low Mystic Black",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 46890,
-      image: require("../../../assets/articles_images/mansory4.png"),
-    },
-    {
-      id: "2",
-      title: "Women Printed Kurta",
-      description: "Neque porro quisquam est qui dolorem ipsum quia",
-      oldPrice: "₹ 2499",
-      price: "₹ 1500",
-      discount: "40%",
-      stars: "4.5",
-      ratings: 56890,
-      image: require("../../../assets/articles_images/mansory9.png"),
-    },
-    {
-      id: "3",
-      title: "HRX by Hrithik Roshan",
-      description: "Neque porro quisquam est qui dolorem ipsum quia",
-      oldPrice: "₹ 2499",
-      price: "₹ 4999",
-      discount: "50%",
-      stars: "4.5",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory2.png"),
-    },
-    {
-      id: "4",
-      title: "IWC Schaffhausen",
-      description: "2021 Pilot's Watch SIHH 2019 44mm",
-      oldPrice: "₹ 650",
-      price: "₹ 1599",
-      discount: "60%",
-      stars: "4",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory3.png"),
-    },
-    {
-      id: "5",
-      title: "Labbins",
-      description: "Labbin White Sneakers For Men and Female",
-      oldPrice: "₹ 650",
-      price: "₹ 1250",
-      discount: "60%",
-      stars: "4",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory5.png"),
-    },
-    {
-      id: "6",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory6.png"),
-    },
-    {
-      id: "7",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory7.png"),
-    },
-    {
-      id: "8",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory8.png"),
-    },
-    {
-      id: "9",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory1.png"),
-    },
-    {
-      id: "10",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory10.png"),
-    },
-    {
-      id: "11",
-      title: "Women Printed Kurta",
-      description: "Neque porro quisquam est qui dolorem ipsum quia",
-      oldPrice: "₹ 2499",
-      price: "₹ 1500",
-      discount: "40%",
-      stars: "4.5",
-      ratings: 56890,
-      image: require("../../../assets/articles_images/mansory9.png"),
-    },
-    {
-      id: "12",
-      title: "HRX by Hrithik Roshan",
-      description: "Neque porro quisquam est qui dolorem ipsum quia",
-      oldPrice: "₹ 2499",
-      price: "₹ 4999",
-      discount: "50%",
-      stars: "4.5",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory2.png"),
-    },
-    {
-      id: "13",
-      title: "IWC Schaffhausen",
-      description: "2021 Pilot's Watch SIHH 2019 44mm",
-      oldPrice: "₹ 650",
-      price: "₹ 1599",
-      discount: "60%",
-      stars: "4",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory3.png"),
-    },
-    {
-      id: "14",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory11.png"),
-    },
-    {
-      id: "15",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory12.png"),
-    },
-    {
-      id: "16",
-      title: "Labbins",
-      description: "Labbin White Sneakers For Men and Female",
-      oldPrice: "₹ 650",
-      price: "₹ 1250",
-      discount: "60%",
-      stars: "4",
-      ratings: 344567,
-      image: require("../../../assets/articles_images/mansory5.png"),
-    },
-    {
-      id: "17",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory6.png"),
-    },
-    {
-      id: "18",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory7.png"),
-    },
-    {
-      id: "19",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory8.png"),
-    },
-    {
-      id: "20",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory1.png"),
-    },
-    {
-      id: "21",
-      title: "NIke Sneakers",
-      description: "Mid Peach Mocha Shoes For Man White Black Pink S...",
-      oldPrice: null,
-      price: "₹ 1900",
-      discount: null,
-      stars: "4.5",
-      ratings: 256890,
-      image: require("../../../assets/articles_images/mansory7.png"),
-    },
-  ];
+  // articles data
+  const [wishlist, setWishlist] = useState([]);
+  const [filteredWishlist, setFilteredWishlist] = useState([]);
 
-  const [filteredWishlist, setFilteredWishlist] = useState(wishlist);
+  useEffect(() => {
+    const getArticleData = async () => {
+      const data = await getData("wishlistarticles");
+      if (data) {
+        setWishlist(data);
+        setFilteredWishlist(data);
+      }
+      setScreenLoader(false);
+    };
+    getArticleData();
+  }, []);
 
   const leftColumn = [];
   const rightColumn = [];
@@ -292,15 +61,15 @@ const Wishlist = (props) => {
     }
   });
 
-  const handleStars = (id, newStar) => {
-    console.log("Id:", id, "New Star:", newStar);
-    setArticles((prevArticles) =>
-      prevArticles.map((item) =>
-        item.id === id ? { ...item, stars: newStar } : item
-      )
+  const handleStars = async (id, newStar) => {
+    const updatedArticles = filteredWishlist.map((item) =>
+      item.id === id ? { ...item, stars: newStar } : item
     );
-  };
 
+    setFilteredWishlist(updatedArticles);
+
+    await saveData("wishlistarticles", updatedArticles);
+  };
   useEffect(() => {
     if (search.trim() === "") {
       setFilteredWishlist(wishlist);
@@ -344,16 +113,6 @@ const Wishlist = (props) => {
 
     return () => clearTimeout(timer);
   };
-
-  useEffect(() => {
-    setFilteredWishlist(wishlist);
-
-    const timer = setTimeout(() => {
-      setScreenLoader(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const renderItem = (item, index) => (
     <TouchableOpacity
