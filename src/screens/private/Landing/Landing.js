@@ -61,7 +61,7 @@ const Landing = () => {
 
           <View style={LandingStyle.button}>
             <CustomButton
-              title="Create Account"
+              title="Get Started"
               textColor={colors.white}
               borderColor={colors.red}
               buttonHeight={55}

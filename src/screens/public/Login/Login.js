@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import LoginStyle from "./Login.style.js";
 import { FontAwesome, Feather } from "@expo/vector-icons";
@@ -12,6 +13,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
+import { getData } from "../../../functions/mmkv.js";
 
 const Login = (props) => {
   const navigation = useNavigation();
@@ -21,12 +23,38 @@ const Login = (props) => {
   const [togglePassword, setTogglePassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const storedUser = await getData("userData");
+
+      if (!storedUser) {
+        setLoading(false);
+        alert("No account found, please sign up first.");
+        return;
+      }
+
+      if (
+        storedUser.username === username &&
+        storedUser.password === password
+      ) {
+        setTimeout(() => {
+          setLoading(false);
+          ToastAndroid.show("Login successful", ToastAndroid.SHORT);
+          navigation.navigate("Landing");
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          setLoading(false);
+          alert("Invalid username or password.");
+        }, 1000);
+      }
+    } catch (error) {
+      console.error("Error during login: ", error);
       setLoading(false);
-      navigation.navigate("Landing");
-    }, 2000);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (

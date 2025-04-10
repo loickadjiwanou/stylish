@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import SignUpStyle from "./SignUp.style.js";
 import { FontAwesome, Feather } from "@expo/vector-icons";
@@ -12,6 +13,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
+import { saveData } from "../../../functions/mmkv.js";
 
 const SignUp = (props) => {
   const navigation = useNavigation();
@@ -23,12 +25,35 @@ const SignUp = (props) => {
   const [togglePassword2, setTogglePassword2] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    if (!username || !password || !password2) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (password !== password2) {
+      alert("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      await saveData("userData", {
+        username: username,
+        password: password,
+      });
+
+      setTimeout(() => {
+        setLoading(false);
+        ToastAndroid.show("Account created successfully", ToastAndroid.SHORT);
+        navigation.navigate("Login");
+      }, 1000);
+    } catch (error) {
+      console.error("Error saving user: ", error);
       setLoading(false);
-      navigation.navigate("Landing");
-    }, 2000);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "stylish",
+    "name": "Stylish",
     "slug": "stylish",
     "author": "Loick Adjiwanou",
     "version": "1.0.0",
@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/logos/logoasset.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alck.stylish"
     },
     "web": {
       "favicon": "./src/assets/logos/logoasset.png"
