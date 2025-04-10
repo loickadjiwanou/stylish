@@ -7,6 +7,8 @@ import {
   ScrollView,
   TextInput,
   ToastAndroid,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import ProfileStyle from "./Profile.style.js";
 import { useNavigation } from "@react-navigation/native";
@@ -57,174 +59,183 @@ const Profile = (props) => {
   };
 
   return (
-    <View style={ProfileStyle.view}>
-      <View style={ProfileStyle.topBar}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
-          style={{ width: 75 }}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
+    >
+      <View style={ProfileStyle.view}>
+        <View style={ProfileStyle.topBar}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
+            style={{ width: 75 }}
+          >
+            <Entypo name="chevron-left" size={24} color="black" />
+          </TouchableOpacity>
+
+          <Text style={ProfileStyle.title}>Profile</Text>
+
+          <View style={{ width: 75 }} />
+        </View>
+
+        <ScrollView
+          vertical
+          showsVerticalScrollIndicator={false}
+          overScrollMode="never"
+          style={{ paddingHorizontal: 5 }}
         >
-          <Entypo name="chevron-left" size={24} color="black" />
-        </TouchableOpacity>
+          <View style={ProfileStyle.imageContainer}>
+            <Image source={profilepic} style={ProfileStyle.image} />
+            <View style={ProfileStyle.edit}>
+              <FontAwesome name="pencil" size={16} color={colors.white} />
+            </View>
+          </View>
 
-        <Text style={ProfileStyle.title}>Profile</Text>
+          <View style={ProfileStyle.box}>
+            <Text style={ProfileStyle.title2}>Personal Details</Text>
 
-        <View style={{ width: 75 }} />
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Email Address</Text>
+              <TextInput
+                placeholder={userData?.email}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Password</Text>
+              <TextInput
+                placeholder={userData?.password}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={password}
+                secureTextEntry={true}
+                onChangeText={(text) => setPassword(text)}
+              />
+              <TouchableOpacity
+                hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
+                onPress={() => {}}
+              >
+                <Text style={ProfileStyle.changePassword}>Change Password</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={ProfileStyle.title22}>Business Address Details</Text>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Pin code</Text>
+              <TextInput
+                placeholder={userData?.pincode}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={pincode}
+                onChangeText={(text) => setPincode(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Address</Text>
+              <TextInput
+                placeholder={userData?.address}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={address}
+                onChangeText={(text) => setAddress(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>City</Text>
+              <TextInput
+                placeholder={userData?.city}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={city}
+                onChangeText={(text) => setCity(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>State</Text>
+              <TextInput
+                placeholder={userData?.state}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={state}
+                onChangeText={(text) => setState(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Country</Text>
+              <TextInput
+                placeholder={userData?.country}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={country}
+                onChangeText={(text) => setCountry(text)}
+              />
+            </View>
+
+            <Text style={ProfileStyle.title22}>Bank Account Details</Text>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>Bank Account Number</Text>
+              <TextInput
+                placeholder={userData?.bankaccountnumber}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={bankaccountnumber}
+                onChangeText={(text) => setBankaccountnumber(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>
+                Account Holder’s Name
+              </Text>
+              <TextInput
+                placeholder={userData?.accountholdername}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={accountholdername}
+                onChangeText={(text) => setAccountholdername(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.fields}>
+              <Text style={ProfileStyle.fieldsTitle}>IFSC Code</Text>
+              <TextInput
+                placeholder={userData?.ifsc}
+                placeholderTextColor={colors.gray}
+                style={ProfileStyle.field}
+                value={ifsc}
+                onChangeText={(text) => setIfsc(text)}
+              />
+            </View>
+
+            <View style={ProfileStyle.button}>
+              <CustomButton
+                title="Save"
+                textColor={colors.white}
+                borderColor={colors.red}
+                buttonHeight={65}
+                buttonWidth={"100%"}
+                titleSize={18}
+                color={colors.red}
+                handlePress={handleSave}
+                loaderColor={colors.white}
+                loading={loading}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </View>
-
-      <ScrollView
-        vertical
-        showsVerticalScrollIndicator={false}
-        overScrollMode="never"
-      >
-        <View style={ProfileStyle.imageContainer}>
-          <Image source={profilepic} style={ProfileStyle.image} />
-          <View style={ProfileStyle.edit}>
-            <FontAwesome name="pencil" size={16} color={colors.white} />
-          </View>
-        </View>
-
-        <View style={ProfileStyle.box}>
-          <Text style={ProfileStyle.title2}>Personal Details</Text>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Email Address</Text>
-            <TextInput
-              placeholder={userData?.email}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Password</Text>
-            <TextInput
-              placeholder={userData?.password}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={password}
-              secureTextEntry={true}
-              onChangeText={(text) => setPassword(text)}
-            />
-            <TouchableOpacity
-              hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
-              onPress={() => {}}
-            >
-              <Text style={ProfileStyle.changePassword}>Change Password</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Text style={ProfileStyle.title22}>Business Address Details</Text>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Pin code</Text>
-            <TextInput
-              placeholder={userData?.pincode}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={pincode}
-              onChangeText={(text) => setPincode(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Address</Text>
-            <TextInput
-              placeholder={userData?.address}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={address}
-              onChangeText={(text) => setAddress(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>City</Text>
-            <TextInput
-              placeholder={userData?.city}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={city}
-              onChangeText={(text) => setCity(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>State</Text>
-            <TextInput
-              placeholder={userData?.state}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={state}
-              onChangeText={(text) => setState(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Country</Text>
-            <TextInput
-              placeholder={userData?.country}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={country}
-              onChangeText={(text) => setCountry(text)}
-            />
-          </View>
-
-          <Text style={ProfileStyle.title22}>Bank Account Details</Text>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Bank Account Number</Text>
-            <TextInput
-              placeholder={userData?.bankaccountnumber}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={bankaccountnumber}
-              onChangeText={(text) => setBankaccountnumber(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>Account Holder’s Name</Text>
-            <TextInput
-              placeholder={userData?.accountholdername}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={accountholdername}
-              onChangeText={(text) => setAccountholdername(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.fields}>
-            <Text style={ProfileStyle.fieldsTitle}>IFSC Code</Text>
-            <TextInput
-              placeholder={userData?.ifsc}
-              placeholderTextColor={colors.gray}
-              style={ProfileStyle.field}
-              value={ifsc}
-              onChangeText={(text) => setIfsc(text)}
-            />
-          </View>
-
-          <View style={ProfileStyle.button}>
-            <CustomButton
-              title="Save"
-              textColor={colors.white}
-              borderColor={colors.red}
-              buttonHeight={65}
-              buttonWidth={"100%"}
-              titleSize={18}
-              color={colors.red}
-              handlePress={handleSave}
-              loaderColor={colors.white}
-              loading={loading}
-            />
-          </View>
-        </View>
-      </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 export default Profile;

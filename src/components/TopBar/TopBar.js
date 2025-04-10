@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import TopBarStyle from "./TopBar.style.js";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { SvgUri } from "react-native-svg";
 import { Asset } from "expo-asset";
+import logo from "../../assets/logos/logo.png";
+import profile from "../../assets/logos/profile.png";
 
 const TopBar = (props) => {
   const navigation = useNavigation();
@@ -39,7 +41,7 @@ const TopBar = (props) => {
       >
         <Entypo name="menu" size={40} color="black" />
       </TouchableOpacity>
-      {!logoUri1 ? (
+      {/* {!logoUri1 ? (
         <View style={{ width: 112, height: 31 }} />
       ) : (
         <SvgUri uri={logoUri2} style={TopBarStyle.logoblue} />
@@ -48,7 +50,9 @@ const TopBar = (props) => {
         <View style={{ width: 45, height: 45 }} />
       ) : (
         <SvgUri uri={logoUri1} style={TopBarStyle.profilepic} />
-      )}
+      )} */}
+      <Image source={logo} style={TopBarStyle.logoblue} />
+      <Image source={profile} style={TopBarStyle.profilepic} />
     </View>
   );
 };

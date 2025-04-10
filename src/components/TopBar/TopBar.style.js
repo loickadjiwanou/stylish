@@ -9,11 +9,12 @@ const TopBarStyle = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: colors.background,
+    backgroundColor: colors.white,
   },
   logoblue: {
     width: 112,
-    height: 31,
+    height: 38,
+    top: 5,
   },
   profilepic: {
     width: 45,

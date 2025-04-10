@@ -9,7 +9,7 @@ const ProfileStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 10 : 40,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   activityIndicator: {
     flex: 1,
@@ -86,7 +86,7 @@ const ProfileStyle = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Montserrat",
     textAlign: "right",
-    marginVertical: 2,
+    marginVertical: 5,
     textDecorationLine: "underline",
   },
   title22: {
