@@ -187,7 +187,7 @@ const DrawerNavigator = () => {
 const StackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="DrawerNavigator"
+      // initialRouteName="DrawerNavigator"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Splash" component={Splash} />
