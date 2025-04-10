@@ -82,7 +82,7 @@ const CartStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginTop: 20,
+    marginVertical: 20,
   },
   orderAmountsValue: {
     fontFamily: "MontserratBold",
