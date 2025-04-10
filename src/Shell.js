@@ -81,10 +81,10 @@ const BottomTabNavigator = () => {
         name="Cart"
         component={Cart}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size, focused }) => (
             <View
               style={{
-                backgroundColor: colors.white,
+                backgroundColor: focused ? colors.red : colors.white,
                 borderRadius: 50,
                 width: 60,
                 height: 60,
@@ -97,7 +97,11 @@ const BottomTabNavigator = () => {
                 shadowRadius: 4,
               }}
             >
-              <Feather name="shopping-cart" size={size} color={color} />
+              <Feather
+                name="shopping-cart"
+                size={size}
+                color={focused ? colors.white : color}
+              />
             </View>
           ),
           tabBarLabel: ({ color }) => (
@@ -145,6 +149,7 @@ const BottomTabNavigator = () => {
               Profile
             </Text>
           ),
+          tabBarStyle: { display: "none" },
         }}
       />
     </Tab.Navigator>
