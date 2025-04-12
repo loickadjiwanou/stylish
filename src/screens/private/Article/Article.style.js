@@ -166,6 +166,8 @@ const ArticleStyle = StyleSheet.create({
   gotocart: {
     flexDirection: "row",
     alignItems: "center",
+    width: "43%",
+    overflow: "hidden",
   },
   gotocarticon: {
     backgroundColor: colors.blue2,
@@ -189,24 +191,27 @@ const ArticleStyle = StyleSheet.create({
     backgroundColor: colors.blue2,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 26,
-    left: -20,
+    paddingHorizontal: 20,
+    left: -27,
     borderRadius: 5,
   },
   gotocarttxt: {
-    left: 10,
     color: colors.white,
     fontSize: 14,
     fontFamily: "MontserratBold",
+    left: 12,
   },
   buttonsView: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 5,
+    justifyContent: "space-between",
   },
   buynowcart: {
     flexDirection: "row",
     alignItems: "center",
+    width: "43%",
+    overflow: "hidden",
   },
   buynowcarticon: {
     backgroundColor: colors.green,
@@ -230,7 +235,7 @@ const ArticleStyle = StyleSheet.create({
     backgroundColor: colors.green,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 26,
+    paddingHorizontal: 24,
     left: -20,
     borderRadius: 5,
   },

@@ -90,6 +90,7 @@ const Article = (props) => {
   }, []);
 
   const [isAlreadyInCart, setIsAlreadyInCart] = useState(false);
+  const [isAreadyLiked, setIsAreadyLiked] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -99,6 +100,12 @@ const Article = (props) => {
           (item) => item.id === article.id
         );
         setIsAlreadyInCart(!!isArticleInCart);
+
+        const likedArticles = (await getData("likedArticles")) || [];
+        const isArticleLiked = likedArticles.find(
+          (item) => item.id === article.id
+        );
+        setIsAreadyLiked(!!isArticleLiked);
       };
 
       checkCart();
@@ -127,6 +134,30 @@ const Article = (props) => {
     }
 
     await saveData("cartArticles", updatedCart);
+  };
+
+  const handleLike = async (article) => {
+    // setLiked(!liked);
+
+    const likedArticles = (await getData("likedArticles")) || [];
+
+    const isAlreadyLiked = likedArticles.find((item) => item.id === article.id);
+
+    let updatedLikedArticles;
+
+    if (isAlreadyLiked) {
+      updatedLikedArticles = likedArticles.filter(
+        (item) => item.id !== article.id
+      );
+      ToastAndroid.show("Article removed from wishlist", ToastAndroid.SHORT);
+      setIsAreadyLiked(false);
+    } else {
+      updatedLikedArticles = [...likedArticles, article];
+      ToastAndroid.show("Article added to wishlist", ToastAndroid.SHORT);
+      setIsAreadyLiked(true);
+    }
+
+    await saveData("likedArticles", updatedLikedArticles);
   };
 
   return (
@@ -368,10 +399,17 @@ const Article = (props) => {
                 </Pressable>
               </View>
 
-              <TouchableOpacity onPress={() => setLiked(!liked)}>
+              <TouchableOpacity
+                style={{
+                  width: "10%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onPress={() => handleLike(article)}
+              >
                 <AntDesign
-                  name={liked ? "heart" : "hearto"}
-                  size={34}
+                  name={isAreadyLiked ? "heart" : "hearto"}
+                  size={30}
                   color={colors.black}
                 />
               </TouchableOpacity>
