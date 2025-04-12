@@ -170,7 +170,7 @@ const Search = (props) => {
 
       <View style={SearchStyle.topLayer}>
         <Text style={SearchStyle.topLayerTitle}>
-          {filteredWishlist.length - 2}+ Iteams
+          {filteredWishlist.length} Items
         </Text>
 
         <View style={SearchStyle.sortBox}>
