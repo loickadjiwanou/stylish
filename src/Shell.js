@@ -19,7 +19,7 @@ import Profile from "./screens/private/Profile/Profile";
 import Article from "./screens/private/Article/Article";
 import Cart from "./screens/private/Cart/Cart";
 import BuyNow from "./screens/private/BuyNow/BuyNow";
-import Checkout from "./screens/private/Checkout/Checkout";
+import CheckoutWrapper from "./CheckoutWrapper";
 // Components
 import DrawerContent from "./components/DrawerContent/DrawerContent";
 // Assets
@@ -559,7 +559,7 @@ const Shell = () => {
         <Stack.Screen name="Article" component={Article} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="BuyNow" component={BuyNow} />
-        <Stack.Screen name="Checkout" component={Checkout} />
+        <Stack.Screen name="Checkout" component={CheckoutWrapper} />
         <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

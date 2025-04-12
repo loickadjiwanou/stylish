@@ -9,26 +9,21 @@ import {
   Alert,
 } from "react-native";
 import CheckoutStyle from "./Checkout.style.js";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
-import { Entypo, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Entypo, AntDesign, MaterialIcons } from "@expo/vector-icons";
 import applepay from "../../../assets/icons/apple.png";
 import maestro from "../../../assets/icons/maestro.png";
 import paypal from "../../../assets/icons/paypal.png";
 import visa from "../../../assets/icons/visa.png";
-import momo from "../../../assets/icons/kkiapay.jpeg";
+import momo from "../../../assets/icons/momo.png";
+import fedapay from "../../../assets/icons/fedapay.png";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
 import colors from "../../../assets/colors/colors.js";
 import Modal from "react-native-modal";
 import success from "../../../assets/images/starpayment.png";
 import dot from "../../../assets/images/dot.png";
-import { useKkiapay } from "@kkiapay-org/react-native-sdk";
-import { saveData, getData } from "../../../functions/mmkv.js";
 
-const Checkout = () => {
+const Checkout = (props) => {
   const navigation = useNavigation();
   const route = useRoute();
   const article = route.params?.article;
@@ -38,84 +33,27 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const {
-    openKkiapayWidget,
-    addSuccessListener,
-    addFailedListener,
-    addKkiapayCloseListener,
-  } = useKkiapay();
-
-  useFocusEffect(
-    React.useCallback(() => {
-      const paymentSuccess = getData("paymentSuccess");
-      if (paymentSuccess) {
-        setModalVisible(true);
-        saveData("paymentSuccess", "false");
-        saveData("cartArticles", []);
-      }
-      return () => {};
-    }, [])
-  );
-
-  useEffect(() => {
-    const successUnsubscribe = addSuccessListener((data) => {
-      console.log("PAYMENT_SUCCESS callback triggered:", data);
-      saveData("paymentSuccess", "true");
-      setModalVisible(true);
-      setLoading(false);
-    });
-
-    const failureUnsubscribe = addFailedListener((error) => {
-      console.log("PAYMENT_FAILED callback triggered:", error);
-      setLoading(false);
-      Alert.alert("Erreur", "Le paiement a échoué. Veuillez réessayer.");
-    });
-
-    const closeUnsubscribe = addKkiapayCloseListener(() => {
-      console.log("WIDGET_CLOSED callback triggered");
-      setLoading(false);
-    });
-
-    return () => {
-      if (typeof successUnsubscribe === "function") successUnsubscribe();
-      if (typeof failureUnsubscribe === "function") failureUnsubscribe();
-      if (typeof closeUnsubscribe === "function") closeUnsubscribe();
-    };
-  }, []);
-
   const handlePay = () => {
     if (selectedMethod === "momo") {
       setLoading(true);
-
-      saveData("paymentSuccess", "false");
-
-      try {
-        console.log("Opening Kkiapay widget...");
-        openKkiapayWidget({
-          amount:
-            parseInt(article?.price.replace(/[^\d]/g, "")) + shippingValue,
-          api_key: "d4740c50d99e11efb9c1454f37708fab",
-          sandbox: true,
-          email: "stylish@gmail.com",
-          phone: "97000000",
-        });
-      } catch (error) {
-        console.error("Error opening Kkiapay widget:", error);
+      setTimeout(() => {
         setLoading(false);
-        Alert.alert("Erreur", "Impossible d'initialiser le paiement.");
-      }
+        navigation.navigate("FedaPayCheckout", { article });
+      }, 1000);
     } else {
       Alert.alert(
-        "Unavailable Payment",
-        "This method is not available, please choose another payment method",
-        [{ text: "OK" }]
+        "Méthode de paiement indisponible",
+        "Cette méthode n'est pas disponible, veuillez choisir une autre méthode de paiement",
+        [{ text: "OK", onPress: () => {} }]
       );
     }
   };
 
   const handleOnBackDoorPress = () => {
     setModalVisible(false);
-    navigation.navigate("DrawerNavigator");
+    setTimeout(() => {
+      navigation.navigate("DrawerNavigator");
+    }, 500);
   };
 
   return (
@@ -226,7 +164,10 @@ const Checkout = () => {
               selectedMethod === "momo" && CheckoutStyle.selectedMethod,
             ]}
           >
-            <Image source={momo} style={CheckoutStyle.momo} />
+            <Image
+              source={fedapay}
+              style={[CheckoutStyle.momo, { resizeMode: "contain" }]}
+            />
             <Text style={CheckoutStyle.cardNumber}>*********2109</Text>
           </Pressable>
         </View>
@@ -276,5 +217,4 @@ const Checkout = () => {
     </View>
   );
 };
-
 export default Checkout;

@@ -24,7 +24,7 @@ const CartStyle = StyleSheet.create({
     marginBottom: 20,
   },
   topBarLeft: {
-    width: "20%",
+    width: "30%",
   },
   topBarTitle: {
     fontFamily: "MontserratBold",
@@ -32,7 +32,7 @@ const CartStyle = StyleSheet.create({
     fontSize: 18,
   },
   topBarRight: {
-    width: "20%",
+    width: "30%",
   },
   address: {
     flexDirection: "row",

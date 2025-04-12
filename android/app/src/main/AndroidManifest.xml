@@ -22,11 +22,19 @@
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+      <!-- Intent filter existant pour le schéma d'URL de l'app -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.alck.stylish"/>
+      </intent-filter>
+      <!-- Nouvel intent filter pour les callbacks de paiement FedaPay -->
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="stylishpay"/>
       </intent-filter>
     </activity>
   </application>
