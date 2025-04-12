@@ -213,7 +213,19 @@ const Wishlist = (props) => {
         activityIndicator()
       ) : (
         <View style={WishlistStyle.main}>
-          {filteredWishlist.length > 0 ? (
+          {wishlist.length === 0 ? (
+            <View style={WishlistStyle.noResultsContainer}>
+              <Text style={WishlistStyle.noResultsText}>
+                Your wishlist is empty
+              </Text>
+            </View>
+          ) : filteredWishlist.length === 0 ? (
+            <View style={WishlistStyle.noResultsContainer}>
+              <Text style={WishlistStyle.noResultsText}>
+                No results found for "{search}"
+              </Text>
+            </View>
+          ) : (
             <ScrollView
               vertical
               overScrollMode="never"
@@ -240,12 +252,6 @@ const Wishlist = (props) => {
               </View>
               <View style={WishlistStyle.footer} />
             </ScrollView>
-          ) : (
-            <View style={WishlistStyle.noResultsContainer}>
-              <Text style={WishlistStyle.noResultsText}>
-                Aucun résultat trouvé pour "{search}"
-              </Text>
-            </View>
           )}
         </View>
       )}

@@ -224,7 +224,7 @@ const Search = (props) => {
           ) : (
             <View style={SearchStyle.noResultsContainer}>
               <Text style={SearchStyle.noResultsText}>
-                Aucun résultat trouvé pour "{search}"
+                No results found for "{search}"
               </Text>
             </View>
           )}
