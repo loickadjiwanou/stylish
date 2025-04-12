@@ -34,7 +34,11 @@ const DrawerContentStyle = StyleSheet.create({
   version: {
     position: "absolute",
     bottom: 20,
-    right: 20,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 20,
   },
   versionText: {
     fontFamily: "MontserratLight",
