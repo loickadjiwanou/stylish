@@ -6,6 +6,7 @@ import {
   LayoutAnimation,
   ScrollView,
   ToastAndroid,
+  BackHandler,
 } from "react-native";
 import LoginStyle from "./Login.style.js";
 import { FontAwesome, Feather } from "@expo/vector-icons";
@@ -22,6 +23,20 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [togglePassword, setTogglePassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const handleLogin = async () => {
     setLoading(true);

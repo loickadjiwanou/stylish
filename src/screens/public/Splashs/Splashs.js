@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import SplashsStyle from "./Splashs.style.js";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
 import { SvgUri } from "react-native-svg";
 import { Asset } from "expo-asset";
+import splash1 from "../../../assets/images/splash1.png";
+import splash2 from "../../../assets/images/splash2.png";
+import splash3 from "../../../assets/images/splash3.png";
 
 const Splashs = () => {
   const navigation = useNavigation();
@@ -65,7 +68,8 @@ const Splashs = () => {
         activeDot={<View style={SplashsStyle.activeDot} />}
       >
         <View style={SplashsStyle.slide}>
-          <SvgUri uri={logoUri1} width={300} height={300} />
+          {/* <SvgUri uri={logoUri1} width={300} height={300} /> */}
+          <Image source={splash1} style={SplashsStyle.image} />
           <Text style={SplashsStyle.title}>Choose Products</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
@@ -74,7 +78,8 @@ const Splashs = () => {
         </View>
 
         <View style={SplashsStyle.slide}>
-          <SvgUri uri={logoUri2} width={350} height={230} />
+          {/* <SvgUri uri={logoUri2} width={350} height={230} /> */}
+          <Image source={splash2} style={SplashsStyle.image} />
           <Text style={SplashsStyle.title}>Make Payment</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
@@ -83,7 +88,8 @@ const Splashs = () => {
         </View>
 
         <View style={SplashsStyle.slide}>
-          <SvgUri uri={logoUri3} width={350} height={350} />
+          {/* <SvgUri uri={logoUri3} width={350} height={350} /> */}
+          <Image source={splash3} style={SplashsStyle.image} />
           <Text style={SplashsStyle.title}>Get Your Order</Text>
           <Text style={SplashsStyle.description}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet

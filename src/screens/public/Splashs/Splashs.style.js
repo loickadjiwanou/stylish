@@ -22,6 +22,11 @@ const SplashsStyle = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Montserrat",
   },
+  image: {
+    width: 300,
+    height: 300,
+    resizeMode: "contain",
+  },
   header: {
     height: 30,
     flexDirection: "row",

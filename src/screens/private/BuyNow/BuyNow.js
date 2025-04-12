@@ -1,11 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  ToastAndroid,
+} from "react-native";
 import BuyNowStyle from "./BuyNow.style.js";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from "@react-navigation/native";
 import { Entypo, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import colors from "../../../assets/colors/colors.js";
 import CustomButton from "../../../components/CustomButton/CustomButton.js";
+import { getData, saveData } from "../../../functions/mmkv.js";
 
 const BuyNow = (props) => {
   const navigation = useNavigation();
@@ -74,6 +86,50 @@ const BuyNow = (props) => {
     }, 1000);
   };
 
+  const [isAreadyLiked, setIsAreadyLiked] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const checkCart = async () => {
+        const likedArticles = (await getData("likedArticles")) || [];
+        const isArticleLiked = likedArticles.find(
+          (item) => item.id === article.id
+        );
+        setIsAreadyLiked(!!isArticleLiked);
+      };
+
+      checkCart();
+
+      return () => {
+        //
+      };
+    }, [article.id])
+  );
+
+  const handleLike = async (article) => {
+    // setLiked(!liked);
+
+    const likedArticles = (await getData("likedArticles")) || [];
+
+    const isAlreadyLiked = likedArticles.find((item) => item.id === article.id);
+
+    let updatedLikedArticles;
+
+    if (isAlreadyLiked) {
+      updatedLikedArticles = likedArticles.filter(
+        (item) => item.id !== article.id
+      );
+      ToastAndroid.show("Article removed from wishlist", ToastAndroid.SHORT);
+      setIsAreadyLiked(false);
+    } else {
+      updatedLikedArticles = [...likedArticles, article];
+      ToastAndroid.show("Article added to wishlist", ToastAndroid.SHORT);
+      setIsAreadyLiked(true);
+    }
+
+    await saveData("likedArticles", updatedLikedArticles);
+  };
+
   return (
     <View style={BuyNowStyle.view}>
       <View style={BuyNowStyle.topBar}>
@@ -87,10 +143,14 @@ const BuyNow = (props) => {
         <Text style={BuyNowStyle.title}>Buy Now</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("Cart")}
+          onPress={() => handleLike(article)}
           hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
         >
-          <AntDesign name="hearto" size={24} color="black" />
+          <AntDesign
+            name={isAreadyLiked ? "heart" : "hearto"}
+            size={24}
+            color="black"
+          />
         </TouchableOpacity>
       </View>
 
