@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import WishlistStyle from "./Wishlist.style.js";
 import TopBar from "../../../components/TopBar/TopBar.js";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import colors from "../../../assets/colors/colors.js";
 import {
   AntDesign,
@@ -38,17 +38,35 @@ const Wishlist = (props) => {
   const [wishlist, setWishlist] = useState([]);
   const [filteredWishlist, setFilteredWishlist] = useState([]);
 
-  useEffect(() => {
-    const getArticleData = async () => {
-      const data = await getData("wishlistarticles");
-      if (data) {
-        setWishlist(data);
-        setFilteredWishlist(data);
-      }
-      setScreenLoader(false);
-    };
-    getArticleData();
+  // useEffect(() => {
+  //   const getArticleData = async () => {
+  //     const data = await getData("likedArticles");
+  //     console.log("data", data);
+  //     if (data) {
+  //       setWishlist(data);
+  //       setFilteredWishlist(data);
+  //     }
+  //     setScreenLoader(false);
+  //   };
+  //   getArticleData();
+  // }, []);
+
+  const loadWishlistData = useCallback(async () => {
+    setScreenLoader(true);
+    const data = await getData("likedArticles");
+    console.log("data", data);
+    if (data) {
+      setWishlist(data);
+      setFilteredWishlist(data);
+    }
+    setScreenLoader(false);
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadWishlistData();
+    }, [loadWishlistData])
+  );
 
   const leftColumn = [];
   const rightColumn = [];
@@ -170,7 +188,9 @@ const Wishlist = (props) => {
       </View>
 
       <View style={WishlistStyle.topLayer}>
-        <Text style={WishlistStyle.topLayerTitle}>52,082+ Iteams</Text>
+        <Text style={WishlistStyle.topLayerTitle}>
+          {filteredWishlist.length} Item(s)
+        </Text>
 
         <View style={WishlistStyle.sortBox}>
           <TouchableOpacity style={WishlistStyle.sort}>

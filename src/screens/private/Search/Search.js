@@ -169,7 +169,9 @@ const Search = (props) => {
       </View>
 
       <View style={SearchStyle.topLayer}>
-        <Text style={SearchStyle.topLayerTitle}>52,082+ Iteams</Text>
+        <Text style={SearchStyle.topLayerTitle}>
+          {filteredWishlist.length - 2}+ Iteams
+        </Text>
 
         <View style={SearchStyle.sortBox}>
           <TouchableOpacity style={SearchStyle.sort}>
